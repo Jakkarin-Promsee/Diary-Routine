@@ -103,3 +103,4 @@ public/
 # Environment variables
 .env
 .env.*
+.vercel
