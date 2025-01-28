@@ -1,0 +1,93 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.pid.lock
+
+# Dependency directories
+node_modules/
+
+# Build output
+build/
+dist/
+
+# Static cache for frameworks like Next.js
+.next/
+out/
+
+# Coverage directory used by testing tools like jest or cypress
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Parcel cache
+.cache/
+.parcel-cache/
+
+# Environment variables
+.env
+.env.*
+.env.local
+
+# Optional eslint cache
+.eslintcache
+
+# VSCode settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# MacOS files
+.DS_Store
+
+# IDE specific files
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Generated files for Storybook
+storybook-static/
+
+# Cypress output
+cypress/screenshots/
+cypress/videos/
+
+# Yarn Berry (Zero Install) settings
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Next.js specific output
+.next/
+out/
+
+# React Native
+*.keystore
+*.pem
+
+# Temporary debugging files
+*.log*
+
+# Coverage files
+.nyc_output
+
+# Optional lockfiles
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
