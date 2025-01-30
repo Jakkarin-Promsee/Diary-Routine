@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "It's no build process",
+    "build": "echo 'Skipping build step'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
