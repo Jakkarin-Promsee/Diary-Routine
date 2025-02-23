@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Diary Rountine API Server",
-  "main": "./src/server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node ./src/server.js",
-    "dev": "nodemon ./src/server.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
     "build:css": "npx tailwindcss -i ./src/styles/tailwind.style.css -o ./src/public/dist/style.css --watch",
     "build": "echo 'Skipping build step'",
     "test": "echo \"Error: no test specified\" && exit 1"
