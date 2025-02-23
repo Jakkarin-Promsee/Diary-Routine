@@ -558,11 +558,6 @@ video {
   position: static;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -585,10 +580,6 @@ video {
 
 .justify-center {
   justify-content: center;
-}
-
-.self-auto {
-  align-self: auto;
 }
 
 .rounded-lg {
