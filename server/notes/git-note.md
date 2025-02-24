@@ -25,10 +25,10 @@
 - log
   - git log
   - git log --oneline
-- unstage
+- unstage, keep change
   - git add <file>
   - git restore --staged <file>
-  - git reset HEAD <file>
-- reset
+  - git reset HEAD~1
+- reset all change
   - git restore <file>
-  - git rest --hard HEAD
+  - git rest --hard HEAD~1
