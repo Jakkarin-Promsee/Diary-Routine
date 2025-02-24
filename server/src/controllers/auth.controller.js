@@ -4,15 +4,42 @@ const { generateToken } = require('../utils/jwt');
 
 exports.register = async (req, res) => {
     try {
-
-        return res.status(401).json({ message: 'have not provide the body' })
-
         const { username, email, password } = req.body;
+
+        // Check if user exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(409).json({
+                success: false,
+                message: 'Email already registered'
+            });
+        }
+
+        // Create new users
         const hashedPassword = await hashPassword(password);
-        const user = await User.create({ username, email, password: hashedPassword });
-        res.status(201).json({ message: 'User registered', user });
+
+        const user = await User.create({
+            username,
+            email,
+            password: hashedPassword
+        });
+
+        res.status(201).json({
+            success: true,
+            message: 'User registered successfully',
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email
+            }
+        });
+
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
     }
 };
 
