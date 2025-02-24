@@ -26,7 +26,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         // Handle response
         const data = await response.json();
 
-        if (data.success) {
+        if (data.ok) {
             document.getElementById("responseMessage").innerText = "Success: " + data.message;
             document.getElementById("registerForm").reset(); // Reset form
         } else {
