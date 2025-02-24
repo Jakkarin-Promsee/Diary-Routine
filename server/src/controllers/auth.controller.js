@@ -6,12 +6,16 @@ exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        // Check if user exists
-        const existingUser = await User.findOne({ email });
+        // Check if user is exist
+        const existingUser = await User.findOne({
+            $or: [{ email }, { username }]
+        });
+
         if (existingUser) {
             return res.status(409).json({
-                success: false,
-                message: 'Email already registered'
+                message: existingUser.email === email
+                    ? 'Email already used'
+                    : 'Username already used'
             });
         }
 
@@ -25,7 +29,6 @@ exports.register = async (req, res) => {
         });
 
         res.status(201).json({
-            success: true,
             message: 'User registered successfully',
             user: {
                 id: user._id,
@@ -35,8 +38,8 @@ exports.register = async (req, res) => {
         });
 
     } catch (error) {
+        console.error(error.message)
         res.status(500).json({
-            success: false,
             message: 'Server error',
             error: error.message
         });
@@ -45,14 +48,26 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        const { username, password } = req.body;
+
+        // Check if user is not exist
+        const user = await User.findOne({ username });
         if (!user || !(await comparePassword(password, user.password))) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({
+                message: user
+                    ? "Wrong password"
+                    : "User doesn't found"
+            });
         }
+
+        // Send token to user
         const token = generateToken(user);
-        res.json({ message: 'Login successful', token });
+        res.status(201).json({
+            message: 'Login successful',
+            token
+        });
     } catch (error) {
+        console.error(error.message)
         res.status(500).json({ message: error.message });
     }
 };
