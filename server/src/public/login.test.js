@@ -22,16 +22,18 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         });
 
         // Handle response
-        const data = await response.json();
-
         if (response.ok) {
+            const data = await response.json();
+
             document.getElementById("responseMessage").innerText = "Success: " + data.message;
             document.getElementById("loginForm").reset(); // Reset form
         } else {
+            const data = await response.json();
+
             document.getElementById("responseMessage").innerText = "Unsuccess: " + data.message;
         }
     } catch (error) {
-        console.error("Error submitting form:", JSON.parse(error.message));
-        document.getElementById("responseMessage").innerText = "Error submitting form: " + error;
+        console.error("Error submitting form:", error.message);
+        document.getElementById("responseMessage").innerText = "Error submitting form: " + error.message;
     }
 });
