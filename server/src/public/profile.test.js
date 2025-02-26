@@ -1,6 +1,6 @@
 async function LoadProfile() {
     try {
-        const response = await fetch(`${config.API_URL}/api/auth/profile`, {
+        const response = await fetch(`/api/auth/profile`, {
             method: "GET",
             credentials: "include", // Send cookies with request
         });
@@ -17,7 +17,7 @@ async function LoadProfile() {
         }
     } catch (error) {
         console.error("Error Loading Profile:", error);
-        document.getElementById("responseMessage").innerText = "Error Loading Profile.";
+        document.getElementById("responseMessage").innerText = "Error Loading Profile: " + error;
     }
 }
 

@@ -15,7 +15,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     try {
         // Send POST request to API
-        const response = await fetch(`${config.API_URL}/api/auth/register`, {
+        const response = await fetch(`/api/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -34,6 +34,6 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         }
     } catch (error) {
         console.error("Error submitting form:", error);
-        document.getElementById("responseMessage").innerText = "Error submitting form.";
+        document.getElementById("responseMessage").innerText = "Error submitting form: " + error;
     }
 });
