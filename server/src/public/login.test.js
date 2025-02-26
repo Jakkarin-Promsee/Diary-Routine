@@ -13,7 +13,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     try {
         // Send POST request to API
-        const response = await fetch(`/api/auth/login`, {
+        const response = await fetch(`${config.API_URL}/api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -15,7 +15,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     try {
         // Send POST request to API
-        const response = await fetch(`/api/auth/register`, {
+        const response = await fetch(`${config.API_URL}/api/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

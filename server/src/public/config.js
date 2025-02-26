@@ -1,3 +1,3 @@
 const config = {
-    API_URL: "https://drt-api.vercel.app/"
+    API_URL: "https://drt-api.vercel.app"
 };
