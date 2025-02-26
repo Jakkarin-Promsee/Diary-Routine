@@ -26,7 +26,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
         if (response.ok) {
             document.getElementById("responseMessage").innerText = "Success: " + data.message;
-            document.getElementById("responseMessage").innerText += "\n" + data.token;
             document.getElementById("loginForm").reset(); // Reset form
         } else {
             document.getElementById("responseMessage").innerText = "Unsuccess: " + data.message;

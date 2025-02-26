@@ -558,14 +558,6 @@ video {
   position: static;
 }
 
-.m-4 {
-  margin: 1rem;
-}
-
-.m-6 {
-  margin: 1.5rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -603,10 +595,6 @@ video {
   display: flex;
 }
 
-.w-60 {
-  width: 15rem;
-}
-
 .w-80 {
   width: 20rem;
 }
@@ -615,16 +603,8 @@ video {
   width: 100%;
 }
 
-.w-4\/5 {
-  width: 80%;
-}
-
 .max-w-md {
   max-width: 28rem;
-}
-
-.max-w-80 {
-  max-width: 20rem;
 }
 
 .flex-col {
