@@ -2,7 +2,7 @@ async function LoadProfile() {
     try {
         const response = await fetch(`${config.API_URL}/api/auth/profile`, {
             method: "GET",
-            // credentials: "include", // Send cookies with request
+            credentials: "include", // Send cookies with request
         });
 
         // Handle response
