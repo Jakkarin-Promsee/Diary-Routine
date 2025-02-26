@@ -62,9 +62,12 @@ exports.login = async (req, res) => {
 
         // Send token to user
         const token = generateToken(user);
+
+        // Set a cookie named 'sessionId' with value '123456'
+        res.cookie('auth_token', token, { maxAge: 900000, httpOnly: true });
+
         res.status(201).json({
-            message: 'Login successful',
-            token
+            message: 'Login successful and auth_token cookie set!'
         });
     } catch (error) {
         console.error(error.message)
