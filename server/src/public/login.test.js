@@ -31,7 +31,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             document.getElementById("responseMessage").innerText = "Unsuccess: " + data.message;
         }
     } catch (error) {
-        console.error("Error submitting form:", error);
+        console.error("Error submitting form:", JSON.parse(error.message));
         document.getElementById("responseMessage").innerText = "Error submitting form: " + error;
     }
 });
