@@ -8,7 +8,7 @@ const app = express();
 
 // Load middlewares
 configureMiddleware(app);
-// configureSecurity(app);
+configureSecurity(app);
 
 // Serve static files
 app.use("/static", express.static(path.join(__dirname, "public")));

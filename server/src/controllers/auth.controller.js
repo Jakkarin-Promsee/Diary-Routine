@@ -38,7 +38,6 @@ exports.register = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error.message)
         res.status(500).json({
             message: 'Server error',
             error: error.message
@@ -63,14 +62,13 @@ exports.login = async (req, res) => {
         // Send token to user
         const token = generateToken(user);
 
-        // Set a cookie named 'sessionId' with value '123456'
+        // Send HTTP cookies
         res.cookie('auth_token', token, { maxAge: 900000, httpOnly: true });
 
         res.status(201).json({
             message: 'Login successful and auth_token cookie set!'
         });
     } catch (error) {
-        console.error(error.message)
         res.status(500).json({ message: error.message });
     }
 };

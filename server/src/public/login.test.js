@@ -21,8 +21,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             body: JSON.stringify(formData)
         });
 
-        console.log('Response:', response);
-
         // Handle response
         if (response.ok) {
             const data = await response.json();

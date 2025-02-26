@@ -24,12 +24,12 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         });
 
         // Handle response
-        const data = await response.json();
-
-        if (data.ok) {
+        if (response.ok) {
+            const data = await response.json();
             document.getElementById("responseMessage").innerText = "Success: " + data.message;
             document.getElementById("registerForm").reset(); // Reset form
         } else {
+            const data = await response.json();
             document.getElementById("responseMessage").innerText = "Unsuccess: " + data.message;
         }
     } catch (error) {
