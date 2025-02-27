@@ -57,8 +57,20 @@ exports.login = async (req, res) => {
 };
 
 exports.getProfile = async (req, res) => {
-    res.json({
+    res.status(200).json({
         message: 'User profile',
         user: req.user
     });
 };
+
+exports.forgetPassword = async (req, res) => {
+    res.status(200).json({
+        message: 'Not avaliable'
+    })
+}
+
+exports.changePassword = async (req, res) => {
+    res.status(200).json({
+        message: 'Not avaliable'
+    })
+}
