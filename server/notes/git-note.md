@@ -1,5 +1,11 @@
 # Commit
 
+## branch
+
+- git push -u origin main
+- git checkout -b feature-branch-name (create and switch)
+- git checkout -b reversion-branch abc1234 (create on head)
+
 ## type
 
 - feat: new feature
