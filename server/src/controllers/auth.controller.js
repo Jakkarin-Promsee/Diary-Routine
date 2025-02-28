@@ -45,16 +45,25 @@ exports.login = async (req, res) => {
         const token = generateToken(result.user);
 
         // Send HTTP cookies
-        res.cookie('auth_token', token, { maxAge: 900000, httpOnly: true });
+        res.cookie('auth_token', token, { maxAge: process.env.HTTP_EXPRIES, httpOnly: true });
 
         res.status(201).json({
             message: result.message
         });
 
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ message: error.message });
     }
 };
+
+exports.logout = async (req, res) => {
+    res.clearCookie('auth_token');
+
+    res.status(200).json({
+        message: 'Logout successfully',
+    });
+}
 
 exports.getProfile = async (req, res) => {
     res.status(200).json({
