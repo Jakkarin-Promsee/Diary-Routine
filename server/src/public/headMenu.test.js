@@ -8,6 +8,8 @@ function LoadHeadMenu() {
         <a href="/static/profile.test.html" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition">Profile</a>
 
         <a href="/static/logout.test.html" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition">Log out</a>
+
+        <a href="/static/changePassword.test.html" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition">Change password</a>
     </div>
     `
 }
