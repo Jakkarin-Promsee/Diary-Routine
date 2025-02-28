@@ -1,5 +1,5 @@
 const { generateToken } = require('../utils/jwt');
-const { registerUser, loginUser, changePasswordUser } = require('../services/auth.service');
+const { registerUser, loginUser, changePasswordUser, forgetPassword } = require('../services/auth.service');
 
 exports.register = async (req, res) => {
     try {
@@ -93,7 +93,21 @@ exports.changePassword = async (req, res) => {
 }
 
 exports.forgetPassword = async (req, res) => {
-    res.status(400).json({
-        message: 'Not avaliable'
-    })
+    try {
+        const { username, email, newPassword } = req.body;
+
+        const result = await forgetPassword(username, email, newPassword);
+
+        if (!result.ok)
+            return res.status(400).json({
+                message: result.message
+            })
+
+        res.status(201).json({
+            message: result.message
+        })
+    } catch (error) {
+        console.error('Forget password error:', error);
+        res.status(500).json({ message: error.message });
+    }
 }

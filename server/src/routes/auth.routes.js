@@ -33,7 +33,7 @@ const router = express.Router();
 router.post('/register', validateUser("register"), authLimiter, register);
 router.post('/login', validateUser("login"), acessUserLimiter, login);
 router.get('/profile', authenticate, authLimiter, getProfile);
-router.get('/logout', logout);
+router.get('/logout', authLimiter, logout);
 router.patch('/change-password', authenticate, validateUser("change-password"), acessUserLimiter, changePassword);
 router.patch('/forget-password', validateUser("forget-password"), acessUserLimiter, forgetPassword);
 

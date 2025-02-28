@@ -78,3 +78,26 @@ exports.changePasswordUser = async (user, password, newPassword) => {
         user
     }
 }
+
+exports.forgetPassword = async (username, email, newPassword) => {
+    const user = await User.findOne({ email });
+
+    // Check user with this email is exist and name correct
+    if (!user || user.username != username)
+        return {
+            ok: false,
+            message: "Username or Email is wrong"
+        }
+
+    // Hash new password
+    const hashedNewPassword = await hashPassword(newPassword);
+
+    // Update password
+    await User.updateOne({ _id: user._id }, { $set: { password: hashedNewPassword } });
+
+    return {
+        ok: true,
+        message: 'Change Password successfully',
+        user
+    }
+}
