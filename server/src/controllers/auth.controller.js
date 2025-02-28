@@ -1,5 +1,5 @@
 const { generateToken } = require('../utils/jwt');
-const { registerUser, loginUser } = require('../services/auth.service');
+const { registerUser, loginUser, changePasswordUser } = require('../services/auth.service');
 
 exports.register = async (req, res) => {
     try {
@@ -57,6 +57,13 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.getProfile = async (req, res) => {
+    res.status(200).json({
+        message: 'User profile',
+        user: req.user
+    });
+};
+
 exports.logout = async (req, res) => {
     res.clearCookie('auth_token');
 
@@ -65,21 +72,28 @@ exports.logout = async (req, res) => {
     });
 }
 
-exports.getProfile = async (req, res) => {
-    res.status(200).json({
-        message: 'User profile',
-        user: req.user
-    });
-};
+exports.changePassword = async (req, res) => {
+    try {
+        const { password, newPassword } = req.body;
 
-exports.forgetPassword = async (req, res) => {
-    res.status(200).json({
-        message: 'Not avaliable'
-    })
+        const result = await changePasswordUser(req.user, password, newPassword);
+
+        if (!result.ok)
+            return res.status(400).json({
+                message: result.message
+            })
+
+        res.status(201).json({
+            message: result.message
+        })
+    } catch (error) {
+        console.error('Change password error:', error);
+        res.status(500).json({ message: error.message });
+    }
 }
 
-exports.changePassword = async (req, res) => {
-    res.status(200).json({
+exports.forgetPassword = async (req, res) => {
+    res.status(400).json({
         message: 'Not avaliable'
     })
 }
