@@ -2,9 +2,18 @@
 
 ## branch
 
-- git push -u origin main
+- git push -u origin main (make shortcut push and pull)
+- git branch -m old-branch-name new-branch-name (change name)
 - git checkout -b feature-branch-name (create and switch)
 - git checkout -b reversion-branch abc1234 (create on head)
+
+## delete
+
+- git branch -d branch-name
+- git branch -D branch-name (force)
+- git push origin --delete branch-name (delete on git)
+- git fetch --prune (Clean up deleted remote branches)
+- git branch -r (List remote branches)
 
 ## type
 
