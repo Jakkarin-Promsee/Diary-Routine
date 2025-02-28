@@ -1,45 +1,30 @@
-const User = require('../models/user.model');
-const { hashPassword, comparePassword } = require('../utils/bcrypt');
 const { generateToken } = require('../utils/jwt');
+const { registerUser, loginUser } = require('../services/auth.service');
 
 exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        // Check if user is exist
-        const existingUser = await User.findOne({
-            $or: [{ email }, { username }]
-        });
+        const result = await registerUser(username, email, password);
 
-        if (existingUser) {
+        if (!result.ok)
             return res.status(409).json({
-                message: existingUser.email === email
-                    ? 'Email already used'
-                    : 'Username already used'
+                message: result.message
             });
-        }
-
-        // Create new users
-        const hashedPassword = await hashPassword(password);
-
-        const user = await User.create({
-            username,
-            email,
-            password: hashedPassword
-        });
 
         res.status(201).json({
-            message: 'User registered successfully',
+            message: result.message,
             user: {
-                id: user._id,
-                username: user.username,
-                email: user.email
+                _id: result._id,
+                username: result.username,
+                email: result.email
             }
         });
 
     } catch (error) {
+        console.error('Registration error:', error);
         res.status(500).json({
-            message: 'Server error',
+            message: 'Internal Server Error',
             error: error.message
         });
     }
@@ -49,30 +34,52 @@ exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // Check if user is not exist
-        const user = await User.findOne({ username });
-        if (!user || !(await comparePassword(password, user.password))) {
+        const result = await loginUser(username, password);
+
+        if (!result.ok)
             return res.status(400).json({
-                message: user
-                    ? "Wrong password"
-                    : "User doesn't found"
+                message: result.message
             });
-        }
 
         // Send token to user
-        const token = generateToken(user);
+        const token = generateToken(result.user);
 
         // Send HTTP cookies
-        res.cookie('auth_token', token, { maxAge: 900000, httpOnly: true });
+        res.cookie('auth_token', token, { maxAge: process.env.HTTP_EXPRIES, httpOnly: true });
 
         res.status(201).json({
-            message: 'Login successful and auth_token cookie set!'
+            message: result.message
         });
+
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ message: error.message });
     }
 };
 
+exports.logout = async (req, res) => {
+    res.clearCookie('auth_token');
+
+    res.status(200).json({
+        message: 'Logout successfully',
+    });
+}
+
 exports.getProfile = async (req, res) => {
-    res.json({ message: 'User profile', user: req.user });
+    res.status(200).json({
+        message: 'User profile',
+        user: req.user
+    });
 };
+
+exports.forgetPassword = async (req, res) => {
+    res.status(200).json({
+        message: 'Not avaliable'
+    })
+}
+
+exports.changePassword = async (req, res) => {
+    res.status(200).json({
+        message: 'Not avaliable'
+    })
+}
